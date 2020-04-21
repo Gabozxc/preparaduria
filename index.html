@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="boton col-md-4 form-inline">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Subir servicio
+                      </button>
+                </div>
+
+
+                <nav class="navbar navbar-light  col-md-4">
+                    <form class="form-inline" id="formulario-buscar">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="buscador">
+
+                    </form>
+                </nav>
+                <div class="perfil col-md-4 form-inline center">
+                    <button class="btn btn-primary -2 my-sm-0">Ver perfil</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Preparaduria o clase</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="modulos">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Materias</label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option>Biologia</option>
+                                  <option>Ciencias naturales</option>
+                                  <option>Matematica</option>
+                                  <option>Servicios de calidad</option>
+                                  <option>Reparacion y electricidad</option>
+                                  <option>Ninguno</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="modalidad">
+                                <label>Modalidad de las clases</label>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="modoClase" id="inlineRadio1" value="Presencial">
+                                    <label class="form-check-label" for="inlineRadio1">Presencial</label>
+                                </div>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="modoClase" id="inlineRadio2" value="SemiPresencial">
+                                    <label class="form-check-label" for="inlineRadio2">SemiPresencial</label>
+                                </div>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="modoClase" id="inlineRadio3" value="Virtual">
+                                    <label class="form-check-label" for="inlineRadio2">Virtual</label>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label>Aparatos tecnologicos necesarios</label>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="tecnologiaRequerida" id="inlineRadio1" value="ninguno">
+                                    <label class="form-check-label" for="inlineRadio1">Ninguno</label>
+                                </div>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="tecnologiaRequerida" id="inlineRadio2" value="Cualquiera">
+                                    <label class="form-check-label" for="inlineRadio2">Cualquiera</label>
+                                </div>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="tecnologiaRequerida" id="inlineRadio3" value="virtual">
+                                    <label class="form-check-label" for="inlineRadio2">Celular y tablets</label>
+                                </div>
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="tecnologiaRequerida" id="inlineRadio3" value="computadoras">
+                                    <label class="form-check-label" for="inlineRadio2">Computadoras</label>
+                                </div>
+
+
+
+                            </div>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="inputPassword6">Cantidad de alumnos</label>
+                                    <input type="number" id="numerosAlumnos" class="form-control mx-sm-3" aria-describedby="Alumnos">
+                                    <small id="passwordHelpInline" class="text-muted">
+                                  0 implica que no hay limite de alumnos
+                                </small>
+                                </div>
+                            </form>
+
+
+                            <div class="form-group">
+                                <input type="date" class="form-control" id="fecha" aria-describedby="emailHelp">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Detalles</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Aca iran datos restantes, como ubicacion de la clase, horarios, dias y demas informacion necesaria para dar la informacion necesaria para la clase" rows="3"></textarea>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="subir" class="btn btn-primary">Subir</button>
+                    </div>
+                    <div class="error" id='divError' role='alert'>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </header>
+
+    <div class="container-cartas">
+
+        <div class="center" id='tabla'>
+
+
+            <div class="card text-white  mb-4" id="carta">
+                <div class="card-header mover">
+                    <p id="cabeza">Matematica</p> <button id="borrar" class="btn btn-light borrar">
+                    <span aria-hidden="true">x</span>
+                </button></div>
+                <div class="card-body">
+                    <h5 class="card-title">Profesor: giovani pedroza</h5>
+                    <p class="card-text">Modalidad de la clase: SemiPresencial</p>
+                    <p class="card-text">Aparato necesario: Computadora</p>
+                    <p class="card-text"><b>Detalles adicionales: </b></p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
+                    <p>Fecha limite de inscripcion:
+                        <b>Sin limite</b>
+                    </p>
+                    <p>Cupos disponibles: <b>ilimitados</b></p>
+                    <button type="button" class="btn btn-light">Inscribirse</button>
+                    <button type="button" class="btn btn-outline-light">Preguntar</button>
+
+                </div>
+            </div>
+
+
+            <div class="card text-white  mb-4" id="carta">
+                <div class="card-header mover">
+                    <p id="cabeza">Biologia</p> <button id="borrar" class="btn btn-light borrar">
+                    <span aria-hidden="true">x</span>
+                </button></div>
+                <div class="card-body">
+                    <h5 class="card-title">Profesor: Richard alejandro</h5>
+                    <p class="card-text">Modalidad de la clase: Virtual</p>
+                    <p class="card-text">Aparato necesario: celular y tablet</p>
+                    <p class="card-text"><b>Detalles adicionales: </b></p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
+                    <p>Fecha limite de inscripcion:
+                        <b>10/12/2020</b>
+                    </p>
+                    <p>Cupos disponibles: <b>3</b></p>
+                    <button type="button" class="btn btn-light">Inscribirse</button>
+                    <button type="button" class="btn btn-outline-light">Preguntar</button>
+                </div>
+            </div>
+
+
+            <div class="card text-white  mb-4" id="carta">
+                <div class="card-header mover">
+                    <p id="cabeza">Ciencias naturales</p> <button id="borrar" class="btn btn-light borrar">
+                    <span aria-hidden="true">x</span>
+                </button></div>
+                <div class="card-body">
+                    <h5 class="card-title">Profesor: giovani pedroza</h5>
+                    <p class="card-text">Modalidad de la clase: SemiPresencial</p>
+                    <p class="card-text">Aparato necesario: Computadora</p>
+                    <p class="card-text"><b>Detalles adicionales: </b></p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
+                    <p>Fecha limite de inscripcion:
+                        <b>Sin limite</b>
+                    </p>
+                    <p>Cupos disponibles: <b>ilimitados</b></p>
+                    <button type="button" class="btn btn-light">Inscribirse</button>
+                    <button type="button" class="btn btn-outline-light">Preguntar</button>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="container registrarse" id="tablaRegistrarse">
+
+        <div class="titulo">
+            <h1 class="text-center">Registrarse</h1>
+        </div>
+        <div class="form">
+            <form id="formularioRegistrarse">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo</label>
+                    <input type="text" class="form-control" id="correoRegistrarse" aria-describedby="emailHelp" placeholder="Introduce el correo">
+                    <small id="emailHelp" class="form-text text-muted">Recibira notifiaciones de sus preparadurias.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Nombre y apellido</label>
+                    <input type="text" class="form-control" id="nombreRegistrarse" placeholder="Nombre y apellido">
+                </div>
+                <div class="form-group">
+                    <label for="idOcupacion">Ocupacion</label>
+                    <select class="form-control" id="idOcupacion">
+                      <option>Estudiante</option>
+                      <option>Profesor</option>
+                      <option>Graduado / sin trabajo</option>
+                      <option>Graduado / con trabajo</option>
+                      <option>Otro</option>
+                    </select>
+                    <small id="passwordHelpInline" class="text-muted">
+                    Graduado con o sin trabajo se mostrara en el perfil como "otro", pero esta se pregunta para recopilar informacion y medir metricas
+                   </small>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control" id="contraRegistrarse" placeholder="contraseña">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Repetir contraseña</label>
+                    <input type="password" class="form-control" id="contraRegistrarse2" placeholder="Repita la contraseña">
+                </div>
+                <div class="form-check" id="formChecked">
+                    <input type="checkbox" class="form-check-input" id="comprobarRegistrarse">
+                    <label class="form-check-label" for="exampleCheck1"><a href="#" id="unLabel">Acepto terminos y condiciones</a></label>
+                    <div class="fallo" id="errorChecked"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="registrarse">Registrarse</button>
+
+            </form>
+
+        </div>
+
+
+
+    </div>
+    <div class="container login" id="tablaLogin">
+
+        <div class="titulo">
+            <h1 class="text-center">Iniciar sesion</h1>
+        </div>
+        <div class="form" id="formIniciar">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo</label>
+                    <input type="email" class="form-control" id="correoLogin" aria-describedby="emailHelp" placeholder="Introduce el correo">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control" id="login1" placeholder="contraseña">
+                </div>
+
+                <button type="submit" id="botonIniciar" class="btn btn-primary">Iniciar sesion</button>
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+
+                <div class="error-login" id="errorLogin">
+
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="js/app.js" type="module"></script>
+</body>
+
+</html>

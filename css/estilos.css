@@ -1,0 +1,92 @@
+    header {
+        padding: 20px;
+    }
+    
+    body .tabla {
+        max-width: 30%;
+        padding: 20px;
+        background-color: white;
+        -webkit-box-shadow: -4px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -4px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: -4px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+    
+    body {
+        background: rgba(63, 81, 181, 1);
+        background: -moz-linear-gradient(left, rgba(63, 81, 181, 1) 0%, rgba(33, 150, 243, 1) 51%, rgba(33, 150, 243, 1) 71%, rgba(63, 81, 181, 1) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(63, 81, 181, 1)), color-stop(51%, rgba(33, 150, 243, 1)), color-stop(71%, rgba(33, 150, 243, 1)), color-stop(100%, rgba(63, 81, 181, 1)));
+        background: -webkit-linear-gradient(left, rgba(63, 81, 181, 1) 0%, rgba(33, 150, 243, 1) 51%, rgba(33, 150, 243, 1) 71%, rgba(63, 81, 181, 1) 100%);
+        background: -o-linear-gradient(left, rgba(63, 81, 181, 1) 0%, rgba(33, 150, 243, 1) 51%, rgba(33, 150, 243, 1) 71%, rgba(63, 81, 181, 1) 100%);
+        background: -ms-linear-gradient(left, rgba(63, 81, 181, 1) 0%, rgba(33, 150, 243, 1) 51%, rgba(33, 150, 243, 1) 71%, rgba(63, 81, 181, 1) 100%);
+        background: linear-gradient(to right, rgba(63, 81, 181, 1) 0%, rgba(33, 150, 243, 1) 51%, rgba(33, 150, 243, 1) 71%, rgba(63, 81, 181, 1) 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3f51b5', endColorstr='#3f51b5', GradientType=1);
+        display: relative;
+    }
+    
+    .modalidadFace {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+    
+    .center {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .center .card {
+        margin: 10px 10px;
+        background-color: #5e35b1;
+        min-height: 600px;
+        min-width: 400px;
+        max-width: 18rem;
+    }
+    
+    .card button {
+        margin: 10px 10px;
+    }
+    
+    .ordenar {
+        border: none;
+        text-align: right;
+        margin-bottom: 0px;
+        padding: 0px;
+        width: auto;
+        height: auto;
+    }
+    
+    .mover {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .mover p {
+        align-self: flex-end;
+    }
+    
+    .registrarse {
+        position: fixed;
+        z-index: 19099999999;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        background-color: white;
+    }
+    
+    .login {
+        display: none;
+        position: fixed;
+        z-index: 19099999999;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        background-color: white;
+    }
+    
+    .container-cartas {
+        display: none;
+    }
