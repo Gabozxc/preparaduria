@@ -1,4 +1,4 @@
 # preparaduria
 
-Proyecto de preparaduria full js para portafolio
-Esto es la vista 
+Proyecto de preparaduria full js para portafolio.
+Este branch es para la vista 
