@@ -1,5 +1,5 @@
+let errores = []
 export class Registrarse {
-
 
 
     constructor(correo, nombreYapellido, ocupacion, contra1, contra2, check) {
@@ -9,7 +9,6 @@ export class Registrarse {
         this.contra1 = contra1
         this.contra2 = contra2
         this.check = check
-        this.enviador = 0
     }
 
 
@@ -19,20 +18,17 @@ export class Registrarse {
 
 
         if (emailRegex.test(this.correo)) {
-
-            //enviar a localStorage
             let formulario = document.getElementById('correoRegistrarse')
 
             formulario.classList.remove('is-invalid')
             formulario.classList.add('is-valid')
-            this.paso1(1)
-
+            errores.shift()
 
         } else {
 
             let formulario = document.getElementById('correoRegistrarse')
             formulario.classList.add('is-invalid')
-            this.paso1(-1)
+            errores.push("Error en el correo")
         }
 
     }
@@ -46,13 +42,13 @@ export class Registrarse {
             let formulario = document.getElementById('nombreRegistrarse')
 
             formulario.classList.add('is-invalid')
-            this.paso2(-1)
+            errores.push("Nombre y apellido vacio")
         } else {
 
             let formulario = document.getElementById('nombreRegistrarse')
             formulario.classList.remove('is-invalid')
             formulario.classList.add('is-valid')
-            this.paso2(1)
+            errores.shift()
 
         }
 
@@ -69,7 +65,7 @@ export class Registrarse {
 
             formulario.classList.add('is-invalid')
             formulario2.classList.add('is-invalid')
-            this.paso3(-1)
+            errores.push("Error en contrase;a")
         } else {
             //enviar a localStorage
 
@@ -79,7 +75,7 @@ export class Registrarse {
             formulario.classList.add('is-valid')
             formulario2.classList.remove('is-invalid')
             formulario2.classList.add('is-valid')
-            this.paso3(1)
+            errores.shift()
 
         }
 
@@ -104,7 +100,7 @@ export class Registrarse {
         if (this.check === true) {
 
             label.classList.add('text-success')
-            this.paso4(1)
+            errores.shift()
 
         } else {
             let parrafo = document.createElement('p')
@@ -112,7 +108,7 @@ export class Registrarse {
             formulario.appendChild(parrafo)
             parrafo.classList = 'text-danger'
             label.classList.remove('text-success')
-            this.paso4(-1)
+            errores.push("Error al marcar terminos y condiciones")
             setTimeout(() => {
                 parrafo.innerText = ''
                 formulario.appendChild(parrafo)
@@ -122,29 +118,20 @@ export class Registrarse {
 
     }
 
-
-    paso1(valor) {
-        return this.enviador += valor + this.enviador
-    }
-    paso2(valor) {
-        return this.enviador += valor + this.enviador
-    }
-
-    paso3(valor) {
-        return this.enviador += valor + this.enviador
-    }
-    paso4(valor) {
-        return this.enviador += valor + this.enviador
-    }
-
     Comprobar() {
 
-        if (this.enviador === '15' || this.enviador === 15) {
+        const tablaLogin = document.getElementById('tablaLogin')
+
+        console.log(errores)
+        if (errores.length === 0) {
             console.log('enviado')
             this.guardarLocalStorage(this.correo, this.nombreYapellido, this.ocupacion, this.contra1)
+
+            tablaLogin.classList.remove('d-none')
+
         } else {
             console.log('no enviado')
-            console.log(this.enviador)
+          
         }
     }
 
@@ -181,17 +168,16 @@ export class Registrarse {
             let tablaCartas = document.querySelector('.container-cartas')
             let inputCorreo = document.getElementById('correoLogin').value
             let inputPass = document.getElementById('login1').value
+            const header = document.getElementById('cabezon')
 
             if (this.correo == inputCorreo && this.contra1 == inputPass) {
 
                 tablaLogin.style.display = 'none'
                 tablaCartas.style.display = 'block'
-
-
+                header.classList.remove('d-none')
             } else {
 
                 let formulario = document.getElementById('errorLogin')
-
                 let parrafo = document.createElement('p')
                 parrafo.innerText = 'Error en que sean iguales los datos'
                 parrafo.classList = 'text-danger'
