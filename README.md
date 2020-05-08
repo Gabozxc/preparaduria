@@ -1,4 +1,3 @@
 # preparaduria
 
-Proyecto de preparaduria full js para portafolio.
-Jeremy
+Esta es la version donde tiene verperfil, no esta terminado, sigo jorungando luego
