@@ -18,6 +18,7 @@ export class Registrarse {
 
 
         if (emailRegex.test(this.correo)) {
+            
             let formulario = document.getElementById('correoRegistrarse')
 
             formulario.classList.remove('is-invalid')
@@ -120,14 +121,14 @@ export class Registrarse {
 
     Comprobar() {
 
-        const tablaLogin = document.getElementById('tablaLogin')
-
         console.log(errores)
         if (errores.length === 0) {
-            console.log('enviado')
-            this.guardarLocalStorage(this.correo, this.nombreYapellido, this.ocupacion, this.contra1)
+            let IdUsuario = ''
+            IdUsuario =  uuid.v1()
 
-            tablaLogin.classList.remove('d-none')
+            console.log('enviado')
+            this.guardarLocalStorage(this.correo, this.nombreYapellido, this.ocupacion, this.contra1, IdUsuario)
+
 
         } else {
             console.log('no enviado')
@@ -135,20 +136,33 @@ export class Registrarse {
         }
     }
 
-    guardarLocalStorage(correo, nombreYapellido, ocupacion, contra) {
+    guardarLocalStorage(correo, nombreYapellido, ocupacion, contra, IdUsuario) {
 
         let direccion = correo
         let pass = contra
+        let usuario = {}
+        let datos = []
+        datos.push(  
+           usuario = {
+            correo,
+            nombreYapellido,
+            ocupacion,
+            contra,
+            IdUsuario
+        }
+        )
 
-        // mandar al local storage  y luego aparecer el login
+    // luego aparecer el login
 
         let tabla = document.getElementById('tablaRegistrarse')
         let tablaLogin = document.getElementById('tablaLogin')
-            // let tablita = document.querySelector('.container-cartas')
+        tablaLogin.classList.remove('d-none')
 
         tablaLogin.style.display = 'block'
         tabla.style.display = 'none'
 
+        //mandar a firebase
+        console.log(datos)
         this.iniciarSesion()
 
 
@@ -196,6 +210,19 @@ export class Registrarse {
 
 
         })
+    }
+
+    botonRegistrarse(){
+        console.log('no entro')
+
+        let tabla = document.getElementById('tablaRegistrarse')
+        let tablaLogin = document.getElementById('tablaLogin')
+        tablaLogin.classList.add('d-none')
+        tablaLogin.style.display = 'none'
+        tabla.style.display = 'block'
+        console.log('entro')
+    
+        
     }
 
 
