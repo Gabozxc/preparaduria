@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
     <link rel="stylesheet" href="css/estilos.css">
+    <link rel="icon" type="image/png" href="img/icon.png" sizes="any">
+
 </head>
 
 <body>
 
-    <header>
+    <header class="d-none" id="cabezon">
         <div class="container">
             <div class="row">
                 <div class="boton col-md-4 form-inline">
@@ -28,7 +32,8 @@
                     </form>
                 </nav>
                 <div class="perfil col-md-4 form-inline center">
-                    <button class="btn btn-primary -2 my-sm-0">Ver perfil</button>
+                    <button class="btn btn-primary -2 my-sm-0" id="verPerfil">Ver perfil</button>
+                    <button class="btn btn-outline-light -2 my-sm-0 ml-3" id="cerrarSesion">Cerrar sesion</button>
                 </div>
             </div>
         </div>
@@ -52,7 +57,7 @@
                                   <option>Matematica</option>
                                   <option>Servicios de calidad</option>
                                   <option>Reparacion y electricidad</option>
-                                  <option>Ninguno</option>
+                                  <option>Otro</option>
                                 </select>
                             </div>
                             <div class="form-group" id="modalidad">
@@ -133,164 +138,217 @@
 
     </header>
 
-    <div class="container-cartas">
+   <main class="container-fluid">
 
-        <div class="center" id='tabla'>
+       <div class="row">
 
+        <div class="container-cartas" id="container-cartas">
 
-            <div class="card text-white  mb-4" id="carta">
-                <div class="card-header mover">
-                    <p id="cabeza">Matematica</p> <button id="borrar" class="btn btn-light borrar">
-                    <span aria-hidden="true">x</span>
-                </button></div>
-                <div class="card-body">
-                    <h5 class="card-title">Profesor: giovani pedroza</h5>
-                    <p class="card-text">Modalidad de la clase: SemiPresencial</p>
-                    <p class="card-text">Aparato necesario: Computadora</p>
-                    <p class="card-text"><b>Detalles adicionales: </b></p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
-                    <p>Fecha limite de inscripcion:
-                        <b>Sin limite</b>
-                    </p>
-                    <p>Cupos disponibles: <b>ilimitados</b></p>
-                    <button type="button" class="btn btn-light">Inscribirse</button>
-                    <button type="button" class="btn btn-outline-light">Preguntar</button>
-
+            <div class="center" id='tabla'>
+    
+    
+                <div class="card text-white  mb-4" id="carta">
+                    <div class="card-header mover">
+                        <p id="cabeza">Matematica</p>
+                    </button></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Profesor: giovani pedroza</h5>
+                        <p class="card-text">Modalidad de la clase: SemiPresencial</p>
+                        <p class="card-text">Aparato necesario: Computadora</p>
+                        <p class="card-text"><b>Detalles adicionales: </b></p>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
+                        <p>Fecha limite de inscripcion:
+                            <b>Sin limite</b>
+                        </p>
+                        <p>Cupos disponibles: <b>ilimitados</b></p>
+                        <button type="button" class="btn btn-light">Inscribirse</button>
+                        <button type="button" class="btn btn-outline-light">Preguntar</button>
+    
+                    </div>
                 </div>
+    
+    
+                <div class="card text-white  mb-4" id="carta">
+                    <div class="card-header mover">
+                        <p id="cabeza">Biologia</p> 
+                    </button></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Profesor: Richard alejandro</h5>
+                        <p class="card-text">Modalidad de la clase: Virtual</p>
+                        <p class="card-text">Aparato necesario: celular y tablet</p>
+                        <p class="card-text"><b>Detalles adicionales: </b></p>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
+                        <p>Fecha limite de inscripcion:
+                            <b>10/12/2020</b>
+                        </p>
+                        <p>Cupos disponibles: <b>3</b></p>
+                        <button type="button" class="btn btn-light">Inscribirse</button>
+                        <button type="button" class="btn btn-outline-light">Preguntar</button>
+                    </div>
+                </div>
+    
+    
+                <div class="card text-white  mb-4" id="carta">
+                    <div class="card-header mover">
+                        <p id="cabeza">Ciencias naturales</p> 
+                    </button></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Profesor: giovani pedroza</h5>
+                        <p class="card-text">Modalidad de la clase: SemiPresencial</p>
+                        <p class="card-text">Aparato necesario: Computadora</p>
+                        <p class="card-text"><b>Detalles adicionales: </b></p>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
+                        <p>Fecha limite de inscripcion:
+                            <b>Sin limite</b>
+                        </p>
+                        <p>Cupos disponibles: <b>ilimitados</b></p>
+                        <button type="button" class="btn btn-light">Inscribirse</button>
+                        <button type="button" class="btn btn-outline-light">Preguntar</button>
+    
+                    </div>
+                </div>
+    
             </div>
-
-
-            <div class="card text-white  mb-4" id="carta">
-                <div class="card-header mover">
-                    <p id="cabeza">Biologia</p> <button id="borrar" class="btn btn-light borrar">
-                    <span aria-hidden="true">x</span>
-                </button></div>
-                <div class="card-body">
-                    <h5 class="card-title">Profesor: Richard alejandro</h5>
-                    <p class="card-text">Modalidad de la clase: Virtual</p>
-                    <p class="card-text">Aparato necesario: celular y tablet</p>
-                    <p class="card-text"><b>Detalles adicionales: </b></p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
-                    <p>Fecha limite de inscripcion:
-                        <b>10/12/2020</b>
-                    </p>
-                    <p>Cupos disponibles: <b>3</b></p>
-                    <button type="button" class="btn btn-light">Inscribirse</button>
-                    <button type="button" class="btn btn-outline-light">Preguntar</button>
-                </div>
+    
+        </div>
+    
+        <div class="container registrarse d-none  col-md-12  p-md-5 " id="tablaRegistrarse">
+    
+           <div class="row">
+    
+            <div class="titulo col-md-12">
+                <h1 class="text-center">Registrarse</h1>
             </div>
+    
+            <div class="form col-md-12">
+                <form id="formularioRegistrarse">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo</label>
+                        <input type="email" class="form-control" id="correoRegistrarse" aria-describedby="emailHelp" placeholder="Introduce el correo">
+                        <small id="emailHelp" class="form-text text-muted">Recibira notifiaciones de sus preparadurias.</small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">nombre y apellido</label>
+                        <input type="text" class="form-control" id="nombreRegistrarse" placeholder="nombre y apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="idOcupacion">Ocupacion</label>
+                        <select class="form-control" id="idOcupacion">
+                          <option>Estudiante</option>
+                          <option>Profesor</option>
+                          <option>Graduado / sin trabajo</option>
+                          <option>Graduado / con trabajo</option>
+                          <option>Otro</option>
+                        </select>
+                        <small id="passwordHelpInline" class="text-muted">
+                        Graduado o sin trabajo se mostrara en el perfil como "otro", pero la pregunta es para recopilar informacion y medir metricas
+                       </small>
+    
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" id="contraRegistrarse" placeholder="contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Repetir contraseña</label>
+                        <input type="password" class="form-control" id="contraRegistrarse2" placeholder="Repita la contraseña">
+                    </div>
+                    <div class="form-check" id="formChecked">
+                        <input type="checkbox" class="form-check-input" id="comprobarRegistrarse">
+                        <label class="form-check-label" for="exampleCheck1"><a href="#" id="unLabel">Acepto terminos y condiciones</a></label>
+                        <div class="fallo" id="errorChecked"></div>
+                    </div>
+    
+                    <button type="submit" class="btn btn-primary" id="registrarse">Crear cuenta</button>
 
+                    <a href="#" id="SaltarseRegistro" class="btn btn-primary">Iniciar sesion</a>
 
-            <div class="card text-white  mb-4" id="carta">
-                <div class="card-header mover">
-                    <p id="cabeza">Ciencias naturales</p> <button id="borrar" class="btn btn-light borrar">
-                    <span aria-hidden="true">x</span>
-                </button></div>
-                <div class="card-body">
-                    <h5 class="card-title">Profesor: giovani pedroza</h5>
-                    <p class="card-text">Modalidad de la clase: SemiPresencial</p>
-                    <p class="card-text">Aparato necesario: Computadora</p>
-                    <p class="card-text"><b>Detalles adicionales: </b></p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque assumenda modi alias, labore suscipit ex, eos rerum voluptate cumque maxime quam eveniet dignissimos enim vitae cum asperiores. Nulla, quae dicta!</p>
-                    <p>Fecha limite de inscripcion:
-                        <b>Sin limite</b>
-                    </p>
-                    <p>Cupos disponibles: <b>ilimitados</b></p>
-                    <button type="button" class="btn btn-light">Inscribirse</button>
-                    <button type="button" class="btn btn-outline-light">Preguntar</button>
-
-                </div>
+                    
+    
+                </form>
+           </div>
+    
+        </div>
+    
+    
+    
+        </div>
+    
+        <div class="container login col-md-12  p-md-5" id="tablaLogin">
+    
+            <div class="titulo">
+                <h1 class="text-center">Iniciar sesion</h1>
             </div>
+            <div class="form">
+                <form id="formIniciar">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo</label>
+                        <input type="email" class="form-control" id="correoLogin" aria-describedby="emailHelp" placeholder="Introduce el correo">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" id="login1" placeholder="contraseña">
+                    </div>
+    
+                    <button type="submit" id="botonIniciar" class="btn btn-outline-primary">Iniciar sesion</button>
 
+                    
+                    <a href="#" class="btn btn-primary" id="crearCuenta">Crear cuenta</a>
+            
+                    <div class="error-login" id="errorLogin"></div>
+                </form>
+    
+            </div>
+           
+    
+    
+    
         </div>
+    
+       </div>
 
+       <div class="row">
+            <div class="col-md-12 container perfil text-center informacion-perfil">
 
-    </div>
-
-    <div class="container registrarse" id="tablaRegistrarse">
-
-        <div class="titulo">
-            <h1 class="text-center">Registrarse</h1>
-        </div>
-        <div class="form">
-            <form id="formularioRegistrarse">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Correo</label>
-                    <input type="text" class="form-control" id="correoRegistrarse" aria-describedby="emailHelp" placeholder="Introduce el correo">
-                    <small id="emailHelp" class="form-text text-muted">Recibira notifiaciones de sus preparadurias.</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Nombre y apellido</label>
-                    <input type="text" class="form-control" id="nombreRegistrarse" placeholder="Nombre y apellido">
-                </div>
-                <div class="form-group">
-                    <label for="idOcupacion">Ocupacion</label>
-                    <select class="form-control" id="idOcupacion">
-                      <option>Estudiante</option>
-                      <option>Profesor</option>
-                      <option>Graduado / sin trabajo</option>
-                      <option>Graduado / con trabajo</option>
-                      <option>Otro</option>
-                    </select>
-                    <small id="passwordHelpInline" class="text-muted">
-                    Graduado con o sin trabajo se mostrara en el perfil como "otro", pero esta se pregunta para recopilar informacion y medir metricas
-                   </small>
+                <div class="fotoPerfil text-center">
+                    
+                     <img src="img/perfil.jpg" alt="Fotoperfil" class="img-fluid img-thumbnail fotoPerfil">
 
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" id="contraRegistrarse" placeholder="contraseña">
+               <div class="datos">
+                <h3>Datos personales</h3>
+
+                <div class="nombreDiv">
+                    <p class="nombre" id="nombrePerfil">Nombre: <span class="Nombre valor"></span><a href="#"><i class="far fa-edit botonEditar"></i></a></p>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Repetir contraseña</label>
-                    <input type="password" class="form-control" id="contraRegistrarse2" placeholder="Repita la contraseña">
+                <div class="correoDiv">
+                    <p class="correo"  id="correoPerfil">Correo: <span class="Correo valor"></span><a href="#"><i class="far fa-edit botonEditar"></i></a></p>
                 </div>
-                <div class="form-check" id="formChecked">
-                    <input type="checkbox" class="form-check-input" id="comprobarRegistrarse">
-                    <label class="form-check-label" for="exampleCheck1"><a href="#" id="unLabel">Acepto terminos y condiciones</a></label>
-                    <div class="fallo" id="errorChecked"></div>
-                </div>
-
-                <button type="submit" class="btn btn-primary" id="registrarse">Registrarse</button>
-
-            </form>
-
-        </div>
-
-
-
-    </div>
-    <div class="container login" id="tablaLogin">
-
-        <div class="titulo">
-            <h1 class="text-center">Iniciar sesion</h1>
-        </div>
-        <div class="form" id="formIniciar">
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Correo</label>
-                    <input type="email" class="form-control" id="correoLogin" aria-describedby="emailHelp" placeholder="Introduce el correo">
+                <div class="ocupacionDiv">
+                    <p class="ocupacion"  id="ocupacionPerfil">Ocupacion: <span class="Ocupacion valor" ></span><a href="#"><i class="far fa-edit botonEditar"></i></a></p>
                 </div>
 
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" id="login1" placeholder="contraseña">
+                <div class="contrasenaDiv">
+                    <p class="passoword" id="passPerfil">Contraseña: <a href="#"><i class="far fa-edit botonEditar"></i></a></p>
                 </div>
+              
 
-                <button type="submit" id="botonIniciar" class="btn btn-primary">Iniciar sesion</button>
-                <button type="submit" class="btn btn-primary">Registrarse</button>
+              
 
-                <div class="error-login" id="errorLogin">
-
-                </div>
-            </form>
-
-        </div>
-
+             
+               
+               </div>
+               <div class="boto">
+               </div>
 
 
-    </div>
+            </div> 
+       </div>
+
+   </main>
+
 
 
 
@@ -309,7 +367,30 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+    <script src="https://kit.fontawesome.com/eafdb4f1f1.js" crossorigin="anonymous"></script>
     <script src="js/app.js" type="module"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDdpE9yzE8XEdn6KaZzR8mTHR584LadczE",
+    authDomain: "preparaduria-usb.firebaseapp.com",
+    databaseURL: "https://preparaduria-usb.firebaseio.com",
+    projectId: "preparaduria-usb",
+    storageBucket: "preparaduria-usb.appspot.com",
+    messagingSenderId: "640089705591",
+    appId: "1:640089705591:web:b0fe5fbf93a21703698a72"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 </body>
 
 </html>

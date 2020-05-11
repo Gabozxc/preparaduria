@@ -77,7 +77,6 @@
     }
     
     .login {
-        display: none;
         position: fixed;
         z-index: 19099999999;
         top: 0;
@@ -89,4 +88,39 @@
     
     .container-cartas {
         display: none;
+    }
+
+    .informacion-perfil {
+        background-color: #3949ab;
+        color:white;
+    }
+
+
+
+    .fotoPerfil {
+
+        width:200px;
+        height:200px;
+        text-align:center;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+
+    .fotoPerfil img {
+        object-fit: cover;
+        width:100%;
+        margin: 0 auto;
+    }
+
+    .botonGuardar { 
+        background-color: #1565c0;
+        margin:0 auto;
+        margin-bottom: 20px;
+        color:white;
+    }
+
+    .botonGuardar:hover {
+        color:white;
+
+        background-color: rgba(21, 101, 192, 0.60);
     }

@@ -1,17 +1,58 @@
 import { Formulario } from './interfaz_formulario.js'
 import { Interfaz } from './interfaz.js'
 import { Registrarse } from './registrarse.js'
+import { verPerfil } from './ver_perfil.js'
 
 const botonEnviado = document.getElementById('subir')
 const inputBuscador = document.getElementById('buscador')
 const botonBorrar = document.getElementById('tabla')
 const botonRegistrarse = document.getElementById('formularioRegistrarse')
+const botonCrearCuenta = document.getElementById('crearCuenta')
+const botonVerPerfil = document.getElementById('verPerfil')
+const saltarseRegistro = document.getElementById('SaltarseRegistro')
+const iniciarSesion = document.getElementById('formIniciar')
+const cerrarSesion = document.getElementById('cerrarSesion')
 
 cargarEventos();
 
 
 function cargarEventos() {
 
+    firebase.auth().onAuthStateChanged(function(user) {
+
+        if (user) {
+
+            let usuario = user
+
+            informacionPerfil(usuario.email)
+
+            var user = user
+        
+            let tablaLogin = document.getElementById('tablaLogin')
+            let tablaCartas = document.querySelector('.container-cartas')
+            let inputCorreo = document.getElementById('correoLogin').value
+            let inputPass = document.getElementById('login1').value
+            const header = document.getElementById('cabezon')
+
+            console.log('se ha comenzado una sesion')
+            tablaLogin.style.display = 'none'
+            tablaCartas.style.display = 'block'
+            header.classList.remove('d-none')
+
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          // ...
+        } else {
+         
+        }
+      });
+    
     inputBuscador.addEventListener('input', (e) => {
 
         e.preventDefault()
@@ -41,20 +82,19 @@ function cargarEventos() {
         }
     })
 
-
-
-
     botonEnviado.addEventListener('click', () => {
 
         const selector = document.getElementById('exampleFormControlSelect1')
         const selectorMarcado = selector.options[selector.selectedIndex].value
         const modalidadRadio = document.modulos.modoClase.value;
+        const profesor = document.getElementById('nombreRegistrarse').value
         const tecnologiaRadio = document.modulos.tecnologiaRequerida.value
         let cantidadAlumnos = document.getElementById('numerosAlumnos').value
         const fechaLimite = document.getElementById('fecha').value
         const detalles = document.getElementById('exampleFormControlTextarea1').value
-        const divError = document.getElementById('divError')
+    
 
+        const divError = document.getElementById('divError')
 
         if (cantidadAlumnos === 0 || cantidadAlumnos === '0') {
 
@@ -68,21 +108,14 @@ function cargarEventos() {
 
             const interfaz = new Interfaz('Rellene todos los campos', divError)
             interfaz.mensajeError()
-
+            
 
         } else {
-            let formulario = new Formulario(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles)
+            let formulario = new Formulario(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, profesor)
 
             formulario.imprimirDatos()
 
         }
-
-
-
-
-
-
-
 
     })
 
@@ -110,7 +143,8 @@ function cargarEventos() {
     })
 
     botonRegistrarse.addEventListener('submit', (e) => {
-        e.preventDefault()
+
+        e.preventDefault() 
 
         const correo = document.getElementById('correoRegistrarse').value
         const nombreYapellido = document.getElementById('nombreRegistrarse').value
@@ -122,14 +156,156 @@ function cargarEventos() {
 
         const validar = new Registrarse(correo, nombreYapellido, ocupacion, contra1, contra2, check)
 
-        validar.validarCorreo()
-        validar.validarNombre()
-        validar.validarContra()
-        validar.validarOcupacion()
-        validar.valirChecked()
-        validar.Comprobar()
+      
+            validar.validarCorreo()
+            validar.validarNombre()
+            validar.validarContra()
+            validar.validarOcupacion()
+            validar.valirChecked()
+            validar.Comprobar()
+         
+            
+     
+        
 
     })
 
+    botonCrearCuenta.addEventListener('click', (e) => {
+        const botonCrearCuenta = new Registrarse()
+
+        botonCrearCuenta.botonRegistrarse()
+    })
+
+    botonVerPerfil.addEventListener('click', (e) => {
+
+        const documentoCartas = document.querySelector('.container-cartas')
+        documentoCartas.classList = 'd-none'
+        const datosCaja = document.querySelector('.datos')
+
+          //crear boton de guardar
+            const botonGuardar = document.createElement('button')
+            botonGuardar.classList.add('btn', 'botonGuardar')
+            botonGuardar.setAttribute('type', 'button')
+            botonGuardar.innerText = 'Guardar Cambios'
+
+        datosCaja.addEventListener('click', (e) => {
+           
+            if (e.target.classList.contains('botonEditar')) {
+
+                const cambio = e.target.parentElement.parentElement.parentElement.querySelector('span')
+                const buscar = e.target.parentElement.parentElement
+              
+                //crear input para agregar valores modificados
+                const input = document.createElement('input')
+                input.setAttribute('type', 'text')
+                input.setAttribute('placeholder', `cambiar el ${cambio.innerText}`)
+                input.classList.add('form-control')
+                cambio.appendChild(input) 
+
+                //eliminar el lapiz de agregar
+                cambio.parentElement.querySelector('a').remove()
+
+                
+
+                if(!cambio.parentElement.parentElement.parentElement.parentElement.querySelector('.botonGuardar')){
+
+                    cambio.parentElement.parentElement.parentElement.parentElement.querySelector('.boto').appendChild(botonGuardar)
+
+                }
+
+                const perfil = new verPerfil()
+              
+                botonGuardar.addEventListener('click', (e) => {
+
+                    const nombre = document.getElementById('nombrePerfil').querySelector('input')
+                    const nombrePerfil = nombre.value
+
+                    const correo = document.getElementById('correoPerfil').querySelector('input')
+                    const correoPerfil = correo.value
+
+                    const ocupacion = document.getElementById('ocupacionPerfil').querySelector('input')
+                    const ocupacionPerfil = ocupacion.value
+    
+                    perfil.actualizarDatos(nombrePerfil, correoPerfil, ocupacionPerfil)
+                   
+    
+                  })
+                 
+
+            }
+
+
+        })
+
+       
+    })
+
+
+    function  informacionPerfil(correoFirebase){
+
+        const profesor = document.getElementById('nombreRegistrarse').value
+        const correo = correoFirebase
+        const ocupaciones = document.getElementById('idOcupacion')
+        const ocupacion = ocupaciones.options[ocupaciones.selectedIndex].value
+        const contra1 = document.getElementById('contraRegistrarse').value
+        const perfil = new verPerfil(profesor, correo, ocupacion, contra1)
+        perfil.imprimirDatos()
+
+
+
+    }
+
+
+
+    saltarseRegistro.addEventListener('click', () => {
+
+        let tabla = document.getElementById('tablaRegistrarse')
+        let tablaLogin = document.getElementById('tablaLogin')
+        tablaLogin.classList.remove('d-none')
+        tablaLogin.style.display = 'block'
+        tabla.style.display = 'none'
+        tabla.classList.add('d-none')
+        console.log('entro')
+
+
+
+    })
+    
+    iniciarSesion.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        const usuario = new Registrarse()
+        usuario.iniciarSesion()
+
+    } )
+
+    cerrarSesion.addEventListener('click', (e)=> {
+        e.preventDefault()
+
+        console.log('hola')
+        firebase.auth().signOut()
+        .then(() => {
+
+            let tabla = document.getElementById('tablaRegistrarse')
+            let tablaLogin = document.getElementById('tablaLogin')
+            tablaLogin.classList.remove('d-none')
+            tablaLogin.style.display = 'block'
+            tabla.style.display = 'none'
+            tabla.classList.add('d-none')
+            console.log('sesion cerrada')
+
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    })
+    
 
 }
+
+
+
+     //Agregar los cursos que maneja el sujeto, para que los pueda borrar
+     // al crear tablas agregar ID, el iD, debe ser el que tiene el usuario almacenado en la base de datos que es un array, al llamar este array con mi ID, llamare a todos los tablones con el ID similar
+     // modificar la imagen, esto lo veo peluo, jamas habia intentao algo asi
