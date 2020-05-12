@@ -12,37 +12,73 @@ const botonVerPerfil = document.getElementById('verPerfil')
 const saltarseRegistro = document.getElementById('SaltarseRegistro')
 const iniciarSesion = document.getElementById('formIniciar')
 let cerrarSesion = document.getElementById('cerrarSesion')
+var correoLogeado = ''
+var nombreUsuario = ''
+export { mandarAFirebaseUsuarios, mandarAFirebaseTablas}
+
+// iniciar base de dato
+var firebaseConfig = {
+
+    apiKey: "AIzaSyDdpE9yzE8XEdn6KaZzR8mTHR584LadczE",
+    authDomain: "preparaduria-usb.firebaseapp.com",
+    databaseURL: "https://preparaduria-usb.firebaseio.com",
+    projectId: "preparaduria-usb",
+    storageBucket: "preparaduria-usb.appspot.com",
+    messagingSenderId: "640089705591",
+    appId: "1:640089705591:web:b0fe5fbf93a21703698a72"
+
+}
+firebase.initializeApp(firebaseConfig);
+
+var db = firebase.firestore();
+
 
 
 cargarEventos();
 
 
+function buscarNombreUsuario(){
+
+
+    db.collection("users").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+           
+            if(correoLogeado === doc.data().correo){
+                    nombreUsuario = doc.data().nombre
+            }else {
+                nombreUsuario = 'anonimo'
+            }
+           
+
+        });
+    });
+
+}
+
+
 function cargarEventos() {
+    
+
+
     
     document.querySelector('body').classList.add('fondoTablones')
 
+
     firebase.auth().onAuthStateChanged(function(user) {
 
+        let tablaLogin = document.getElementById('tablaLogin')
+        let tablaCartas = document.querySelector('.container-cartas')
+        const header = document.getElementById('cabezon')
+
+               
         if (user) {
-
-            let usuario = user
-
-            informacionPerfil(usuario.email)
-
-            var user = user
-        
-            let tablaLogin = document.getElementById('tablaLogin')
-            let tablaCartas = document.querySelector('.container-cartas')
-            let inputCorreo = document.getElementById('correoLogin').value
-            let inputPass = document.getElementById('login1').value
-            const header = document.getElementById('cabezon')
-
-            console.log('se ha comenzado una sesion')
             tablaLogin.style.display = 'none'
             tablaCartas.style.display = 'block'
             header.classList.remove('d-none')
-
+            correoLogeado = user.email
+            buscarNombreUsuario()
           // User is signed in.
+        
           var displayName = user.displayName;
           var email = user.email;
           var emailVerified = user.emailVerified;
@@ -52,7 +88,9 @@ function cargarEventos() {
           var providerData = user.providerData;
           // ...
         } else {
-         
+          // User is signed out.
+          // ...
+        
         }
       });
     
@@ -90,7 +128,6 @@ function cargarEventos() {
         const selector = document.getElementById('exampleFormControlSelect1')
         const selectorMarcado = selector.options[selector.selectedIndex].value
         const modalidadRadio = document.modulos.modoClase.value;
-        const profesor = document.getElementById('nombreRegistrarse').value
         const tecnologiaRadio = document.modulos.tecnologiaRequerida.value
         let cantidadAlumnos = document.getElementById('numerosAlumnos').value
         const fechaLimite = document.getElementById('fecha').value
@@ -114,9 +151,14 @@ function cargarEventos() {
             
 
         } else {
-            let formulario = new Formulario(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, profesor)
+                
+            let formulario = new Formulario(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, nombreUsuario)
 
             formulario.imprimirDatos()
+
+
+            mandarAFirebaseTablas(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, nombreUsuario)
+
 
         }
 
@@ -126,7 +168,7 @@ function cargarEventos() {
 
         e.preventDefault()
 
-        console.log(e.target)
+        
 
         if (e.target.classList.contains('borrar')) {
 
@@ -323,8 +365,6 @@ function cargarEventos() {
 
     }
 
-
-
     saltarseRegistro.addEventListener('click', () => {
 
         let tabla = document.getElementById('tablaRegistrarse')
@@ -368,11 +408,74 @@ function cargarEventos() {
         })
 
     })
+}
+
+function mandarAFirebaseUsuarios(correo,nombre, ocupacion){
+        
+    db.collection("users").add({
+        first: correo,
+        correo: nombre,
+        ocupacion:ocupacion,
+        IdUsuario: uuid.v1()
+      })
+       .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+       })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+       });
+
+   }
+  
+function mandarAFirebaseTablas(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, profesor){
+
+
+    db.collection("tablas").add({
+        profesor: profesor,
+        modalidadRadio: modalidadRadio,
+        tecnologiaRadio: tecnologiaRadio,
+        cantidadAlumnos: cantidadAlumnos,
+        fechaLimite: fechaLimite,
+        detalles: detalles,
+        selectorMarcado: selectorMarcado,
+        correo: correoLogeado,
+      })
+       .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+       })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+       });
+
+
+}
+
+function leerDatos(){
+
+
+    /*
+
+    selector, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, profesor
     
+    */
+
+     let formulario = new Formulario()
+
+    db.collection("tablas").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+           
+            formulario.imprimirDesdeFirebase(doc.data().selectorMarcado, doc.data().modalidadRadio,  doc.data().tecnologiaRadio, doc.data().cantidadAlumnos,  doc.data().fechaLimite, doc.data().detalles, doc.data().profesor)
+
+
+        });
+    });
+
 
 }
 
 
+
+leerDatos()
 
      //Agregar los cursos que maneja el sujeto, para que los pueda borrar
      // al crear tablas agregar ID, el iD, debe ser el que tiene el usuario almacenado en la base de datos que es un array, al llamar este array con mi ID, llamare a todos los tablones con el ID similar

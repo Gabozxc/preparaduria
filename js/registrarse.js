@@ -1,3 +1,5 @@
+import { mandarAFirebaseUsuarios } from './app.js'
+
 let errores = []
 export class Registrarse {
 
@@ -157,14 +159,12 @@ export class Registrarse {
 
             firebase.auth().createUserWithEmailAndPassword(this.correo, this.contra1)
             .then(() => {
-                
-                let IdUsuario = ''
-                IdUsuario =  uuid.v1()
 
                 let formulario2 = document.getElementById('correoRegistrarse')
                 formulario2.classList.remove('is-invalid')
                 formulario2.classList.add('is-valid')
 
+                mandarAFirebaseUsuarios(this.correo, this.nombreYapellido, this.ocupacion)
                 this.verificarConCorreo()
                 this.aparecerLogin()
 

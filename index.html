@@ -101,16 +101,14 @@
 
 
                             </div>
-                            <form class="form-inline">
                                 <div class="form-group">
                                     <label for="inputPassword6">Cantidad de alumnos</label>
-                                    <input type="number" id="numerosAlumnos" class="form-control mx-sm-3" aria-describedby="Alumnos">
+                                    <input type="number" id="numerosAlumnos" class="form-control" aria-describedby="Alumnos">
                                     <small id="passwordHelpInline" class="text-muted">
                                   0 implica que no hay limite de alumnos
                                 </small>
                                 </div>
-                            </form>
-
+                            
 
                             <div class="form-group">
                                 <input type="date" class="form-control" id="fecha" aria-describedby="emailHelp">
@@ -148,7 +146,7 @@
         <div class="container-cartas" id="container-cartas">
 
             <div class="center" id='tabla'>
-    
+<!--     
     
                 <div class="card text-white  mb-4" id="carta">
                     <div class="card-header mover">
@@ -209,7 +207,7 @@
                         <button type="button" class="btn btn-outline-light">Preguntar</button>
     
                     </div>
-                </div>
+                </div> -->
     
             </div>
     
@@ -382,20 +380,13 @@
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
      <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyDdpE9yzE8XEdn6KaZzR8mTHR584LadczE",
-    authDomain: "preparaduria-usb.firebaseapp.com",
-    databaseURL: "https://preparaduria-usb.firebaseio.com",
-    projectId: "preparaduria-usb",
-    storageBucket: "preparaduria-usb.appspot.com",
-    messagingSenderId: "640089705591",
-    appId: "1:640089705591:web:b0fe5fbf93a21703698a72"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+
+
 
 </body>
 
