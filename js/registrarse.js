@@ -181,7 +181,7 @@ export class Registrarse {
 
 
                     let parrafo = document.createElement('p')
-                    parrafo.innerText = 'El correo que mando esta siendo utilizado'
+                    parrafo.innerText = 'El correo es invalido o esta siendo utilizado'
                     
                     let formulario2 = document.getElementById('correoRegistrarse')
                     formulario2.classList.add('is-invalid')

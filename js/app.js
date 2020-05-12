@@ -11,12 +11,15 @@ const botonCrearCuenta = document.getElementById('crearCuenta')
 const botonVerPerfil = document.getElementById('verPerfil')
 const saltarseRegistro = document.getElementById('SaltarseRegistro')
 const iniciarSesion = document.getElementById('formIniciar')
-const cerrarSesion = document.getElementById('cerrarSesion')
+let cerrarSesion = document.getElementById('cerrarSesion')
+
 
 cargarEventos();
 
 
 function cargarEventos() {
+    
+    document.querySelector('body').classList.add('fondoTablones')
 
     firebase.auth().onAuthStateChanged(function(user) {
 
@@ -178,11 +181,65 @@ function cargarEventos() {
 
     botonVerPerfil.addEventListener('click', (e) => {
 
-        const documentoCartas = document.querySelector('.container-cartas')
-        documentoCartas.classList = 'd-none'
-        const datosCaja = document.querySelector('.datos')
 
-          //crear boton de guardar
+        document.getElementById('tablonPerfil').classList.remove('d-none')
+        const cerrarPerfil = document.createElement('Button')
+        cerrarPerfil.classList.add('btn', 'my-sm-0', 'btn-outline-light', 'ml-3')
+        cerrarPerfil.setAttribute('id', 'cerrarPerfil')
+        cerrarPerfil.innerText = 'Salir del perfil'
+
+        const dibBtones = document.getElementById('botonesPerfilCerrar')
+        dibBtones.appendChild(cerrarPerfil)
+
+
+        let botonCerrarSesion = document.getElementById('cerrarSesion')
+        botonCerrarSesion.remove()
+
+         botonCerrarSesion = document.createElement('Button')
+         botonCerrarSesion.classList.add('btn', 'my-sm-0', 'btn-outline-light', 'ml-3')
+        botonCerrarSesion.setAttribute('id', 'cerrarSesion')
+        botonCerrarSesion.innerText = 'Cerrar sesion'
+        dibBtones.appendChild(botonCerrarSesion)
+
+        botonCerrarSesion.addEventListener('click', (e)=> {
+            e.preventDefault()
+    
+            console.log('hola')
+            firebase.auth().signOut()
+            .then(() => {
+    
+                let tabla = document.getElementById('tablaRegistrarse')
+                let tablaLogin = document.getElementById('tablaLogin')
+                tablaLogin.classList.remove('d-none')
+                tablaLogin.style.display = 'block'
+                tabla.style.display = 'none'
+                tabla.classList.add('d-none')
+                console.log('sesion cerrada')
+    
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    
+        })
+        
+        
+
+
+
+
+
+        const body = document.querySelector('body')
+
+        body.classList.add('fondoVerPerfil')
+        body.classList.remove('fondoTablones')
+
+        const documentoCartas = document.querySelector('.container-cartas')
+        documentoCartas.classList.add('d-none')
+        const datosCaja = document.querySelector('.datos')
+        botonVerPerfil.classList.add('d-none')
+
+            //crear boton de guardar
             const botonGuardar = document.createElement('button')
             botonGuardar.classList.add('btn', 'botonGuardar')
             botonGuardar.setAttribute('type', 'button')
@@ -234,6 +291,17 @@ function cargarEventos() {
 
             }
 
+
+        })
+
+        cerrarPerfil.addEventListener('click', () => {
+
+            document.getElementById('tablonPerfil').classList.add('d-none')
+            cerrarPerfil.remove()
+            botonVerPerfil.classList.remove('d-none')
+            documentoCartas.classList.remove('d-none')
+            body.classList.remove('fondoVerPerfil')
+            body.classList.add('fondoTablones')
 
         })
 

@@ -33,5 +33,7 @@ export class verPerfil {
             ocupacion.innerHTML = ocupacionEducacion
       }
 
+      
+
     
 }
