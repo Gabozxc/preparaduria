@@ -43,7 +43,7 @@ function buscarNombreUsuario(){
     db.collection("users").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
            
-            if('gabozxc@gmail.com' === doc.data().correo){
+            if( correoLogeado === doc.data().correo){
                     nombreUsuario = doc.data().nombre
             }else {
                 
