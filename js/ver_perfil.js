@@ -23,6 +23,8 @@ export class verPerfil {
       }
 
       actualizarDatos(nombrePerfil, correoPerfil, ocupacionEducacion){
+
+            
             const nombre = document.querySelector('#nombrePerfil span')
             nombre.innerHTML = nombrePerfil
             

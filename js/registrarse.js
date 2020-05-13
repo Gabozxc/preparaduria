@@ -1,4 +1,4 @@
-import { mandarAFirebaseUsuarios } from './app.js'
+import { mandarAFirebaseUsuarios, datosVerPerfil } from './app.js'
 
 let errores = []
 export class Registrarse {
@@ -244,6 +244,9 @@ export class Registrarse {
 
 
             firebase.auth().signInWithEmailAndPassword(inputCorreo, inputPass)
+                .then( () => {
+                    datosVerPerfil()
+                })
                 .catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
@@ -272,6 +275,7 @@ export class Registrarse {
                     tablaLogin.style.display = 'none'
                     tablaCartas.style.display = 'block'
                     header.classList.remove('d-none')
+                    
                   // User is signed in.
                 
                   var displayName = user.displayName;

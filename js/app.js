@@ -11,10 +11,13 @@ const botonCrearCuenta = document.getElementById('crearCuenta')
 const botonVerPerfil = document.getElementById('verPerfil')
 const saltarseRegistro = document.getElementById('SaltarseRegistro')
 const iniciarSesion = document.getElementById('formIniciar')
+const botonIniciarSesion = document.getElementById('botonIniciar')
 let cerrarSesion = document.getElementById('cerrarSesion')
+var datosUsuarios = ''
 var nombreUsuario = ''
 var correoLogeado = ''
-export { mandarAFirebaseUsuarios, mandarAFirebaseTablas}
+var ocupacionUsuario = ''
+export { mandarAFirebaseUsuarios, mandarAFirebaseTablas, datosVerPerfil}
 
 // iniciar base de dato
 var firebaseConfig = {
@@ -51,15 +54,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         tablaCartas.style.display = 'block'
         header.classList.remove('d-none')
         correoLogeado = user.email
-      // User is signed in.
-    
-      var displayName = user.displayName;
-      var email = user.email;
-      var emailVerified = user.emailVerified;
-      var photoURL = user.photoURL;
-      var isAnonymous = user.isAnonymous;
-      var uid = user.uid;
-      var providerData = user.providerData;
+        datosUsuarios = user
       // ...
       
       db.collection("users").get().then((querySnapshot) => {
@@ -67,11 +62,10 @@ firebase.auth().onAuthStateChanged(function(user) {
         
             if( doc.data().correo === user.email){
                     nombreUsuario = doc.data().nombre
-            }else {
-                
-            }
-          
+                    ocupacionUsuario = doc.data().ocupacion
+                    console.log('entro arriba')
 
+            }
         });
     });
     } else {
@@ -212,13 +206,13 @@ function cargarEventos() {
 
     })
 
-    botonCrearCuenta.addEventListener('click', (e) => {
+    botonCrearCuenta.addEventListener('click', () => {
         const botonCrearCuenta = new Registrarse()
 
         botonCrearCuenta.botonRegistrarse()
     })
 
-    botonVerPerfil.addEventListener('click', (e) => {
+    botonVerPerfil.addEventListener('click', () => {
 
 
         document.getElementById('tablonPerfil').classList.remove('d-none')
@@ -262,12 +256,6 @@ function cargarEventos() {
     
         })
         
-        
-
-
-
-
-
         const body = document.querySelector('body')
 
         body.classList.add('fondoVerPerfil')
@@ -289,7 +277,6 @@ function cargarEventos() {
             if (e.target.classList.contains('botonEditar')) {
 
                 const cambio = e.target.parentElement.parentElement.parentElement.querySelector('span')
-                const buscar = e.target.parentElement.parentElement
               
                 //crear input para agregar valores modificados
                 const input = document.createElement('input')
@@ -311,7 +298,7 @@ function cargarEventos() {
 
                 const perfil = new verPerfil()
               
-                botonGuardar.addEventListener('click', (e) => {
+                botonGuardar.addEventListener('click', () => {
 
                     const nombre = document.getElementById('nombrePerfil').querySelector('input')
                     const nombrePerfil = nombre.value
@@ -344,6 +331,8 @@ function cargarEventos() {
 
         })
 
+
+
        
     })
 
@@ -363,8 +352,8 @@ function cargarEventos() {
     
     iniciarSesion.addEventListener('submit', (e) => {
         e.preventDefault()
-
         const usuario = new Registrarse()
+        datosVerPerfil()
         usuario.iniciarSesion()
 
     } )
@@ -390,6 +379,8 @@ function cargarEventos() {
         })
 
     })
+
+    botonIniciarSesion.addEventListener('click', datosVerPerfil())
 }
 
 function mandarAFirebaseUsuarios(correo, nombre, ocupacion){
@@ -453,6 +444,24 @@ function leerDatos(){
     });
 
 
+}
+
+function datosVerPerfil(){
+    
+    db.collection("users").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            
+            if(doc.data().correo === datosUsuarios.email){
+                let nombre = doc.data().nombre
+                let ocupacion = doc.data().ocupacion
+                    console.log('entro abajo')
+                    let perfil = new verPerfil(nombreUsuario, correoLogeado, ocupacionUsuario)
+                    perfil.actualizarDatos(nombre, correoLogeado, ocupacion)
+            }
+        });
+    });
+
+    
 }
 
 
