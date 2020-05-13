@@ -37,6 +37,8 @@ var db = firebase.firestore();
 cargarEventos();
 
 
+
+
 function buscarNombreUsuario(){
 
 
@@ -55,6 +57,35 @@ function buscarNombreUsuario(){
 
 }
 
+firebase.auth().onAuthStateChanged(function(user) {
+
+    let tablaLogin = document.getElementById('tablaLogin')
+    let tablaCartas = document.querySelector('.container-cartas')
+    const header = document.getElementById('cabezon')
+
+           
+    if (user) {
+        tablaLogin.style.display = 'none'
+        tablaCartas.style.display = 'block'
+        header.classList.remove('d-none')
+        correoLogeado = user.email
+        buscarNombreUsuario()
+      // User is signed in.
+    
+      var displayName = user.displayName;
+      var email = user.email;
+      var emailVerified = user.emailVerified;
+      var photoURL = user.photoURL;
+      var isAnonymous = user.isAnonymous;
+      var uid = user.uid;
+      var providerData = user.providerData;
+      // ...
+    } else {
+      // User is signed out.
+      // ...
+    
+    }
+  });
 
 function cargarEventos() {
     
@@ -64,35 +95,7 @@ function cargarEventos() {
     document.querySelector('body').classList.add('fondoTablones')
 
 
-    firebase.auth().onAuthStateChanged(function(user) {
-
-        let tablaLogin = document.getElementById('tablaLogin')
-        let tablaCartas = document.querySelector('.container-cartas')
-        const header = document.getElementById('cabezon')
-
-               
-        if (user) {
-            tablaLogin.style.display = 'none'
-            tablaCartas.style.display = 'block'
-            header.classList.remove('d-none')
-            correoLogeado = user.email
-            buscarNombreUsuario()
-          // User is signed in.
-        
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          // ...
-        } else {
-          // User is signed out.
-          // ...
-        
-        }
-      });
+   
     
     inputBuscador.addEventListener('input', (e) => {
 
