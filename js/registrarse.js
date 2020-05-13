@@ -165,6 +165,7 @@ export class Registrarse {
                 formulario2.classList.add('is-valid')
 
                 mandarAFirebaseUsuarios(this.correo, this.nombreYapellido, this.ocupacion)
+                
                 this.verificarConCorreo()
                 this.aparecerLogin()
 

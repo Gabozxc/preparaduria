@@ -397,11 +397,11 @@ function cargarEventos() {
     })
 }
 
-function mandarAFirebaseUsuarios(correo,nombre, ocupacion){
+function mandarAFirebaseUsuarios(correo, nombre, ocupacion){
         
     db.collection("users").add({
-        nombre: nombre,
         correo: correo,
+        nombre: nombre,
         ocupacion:ocupacion,
         IdUsuario: uuid.v1()
       })
