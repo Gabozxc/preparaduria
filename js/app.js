@@ -13,6 +13,7 @@ const saltarseRegistro = document.getElementById('SaltarseRegistro')
 const iniciarSesion = document.getElementById('formIniciar')
 let cerrarSesion = document.getElementById('cerrarSesion')
 var nombreUsuario = ''
+var correoLogeado = ''
 export { mandarAFirebaseUsuarios, mandarAFirebaseTablas}
 
 // iniciar base de dato
@@ -60,15 +61,21 @@ firebase.auth().onAuthStateChanged(function(user) {
       var uid = user.uid;
       var providerData = user.providerData;
       // ...
+      console.log('Correo conectado')
+      console.log(user.email)
       db.collection("users").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-           
-            if( user.email === doc.data().correo){
+        
+            if( doc.data().correo === user.email){
                     nombreUsuario = doc.data().nombre
             }else {
                 
             }
+           console.log("Nombre dado por el corro conectado")
            console.log(nombreUsuario)
+           console.log('El correo era')
+           console.log(user.email)
+     
 
         });
     });
