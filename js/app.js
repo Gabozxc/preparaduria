@@ -50,7 +50,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         tablaLogin.style.display = 'none'
         tablaCartas.style.display = 'block'
         header.classList.remove('d-none')
-        
+        correoLogeado = user.email
       // User is signed in.
     
       var displayName = user.displayName;
@@ -61,8 +61,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       var uid = user.uid;
       var providerData = user.providerData;
       // ...
-      console.log('Correo conectado')
-      console.log(user.email)
+      
       db.collection("users").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
         
@@ -71,11 +70,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             }else {
                 
             }
-           console.log("Nombre dado por el corro conectado")
-           console.log(nombreUsuario)
-           console.log('El correo era')
-           console.log(user.email)
-     
+          
 
         });
     });
