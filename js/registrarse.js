@@ -1,4 +1,4 @@
-import { mandarAFirebaseUsuarios, buscarNombreUsuario } from './app.js'
+import { mandarAFirebaseUsuarios } from './app.js'
 
 let errores = []
 export class Registrarse {

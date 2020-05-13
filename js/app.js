@@ -12,9 +12,8 @@ const botonVerPerfil = document.getElementById('verPerfil')
 const saltarseRegistro = document.getElementById('SaltarseRegistro')
 const iniciarSesion = document.getElementById('formIniciar')
 let cerrarSesion = document.getElementById('cerrarSesion')
-var correoLogeado = ''
 var nombreUsuario = ''
-export { mandarAFirebaseUsuarios, mandarAFirebaseTablas, buscarNombreUsuario}
+export { mandarAFirebaseUsuarios, mandarAFirebaseTablas}
 
 // iniciar base de dato
 var firebaseConfig = {
@@ -39,24 +38,6 @@ cargarEventos();
 
 
 
-function buscarNombreUsuario(){
-
-
-    db.collection("users").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-           
-            if( correoLogeado === doc.data().correo){
-                    nombreUsuario = doc.data().nombre
-            }else {
-                
-            }
-           console.log(nombreUsuario)
-
-        });
-    });
-
-}
-
 firebase.auth().onAuthStateChanged(function(user) {
 
     let tablaLogin = document.getElementById('tablaLogin')
@@ -68,8 +49,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         tablaLogin.style.display = 'none'
         tablaCartas.style.display = 'block'
         header.classList.remove('d-none')
-        correoLogeado = user.email
-        buscarNombreUsuario()
+        
       // User is signed in.
     
       var displayName = user.displayName;
@@ -80,6 +60,18 @@ firebase.auth().onAuthStateChanged(function(user) {
       var uid = user.uid;
       var providerData = user.providerData;
       // ...
+      db.collection("users").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+           
+            if( user.email === doc.data().correo){
+                    nombreUsuario = doc.data().nombre
+            }else {
+                
+            }
+           console.log(nombreUsuario)
+
+        });
+    });
     } else {
       // User is signed out.
       // ...
