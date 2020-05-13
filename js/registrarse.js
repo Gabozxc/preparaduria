@@ -1,4 +1,4 @@
-import { mandarAFirebaseUsuarios } from './app.js'
+import { mandarAFirebaseUsuarios, buscarNombreUsuario } from './app.js'
 
 let errores = []
 export class Registrarse {
@@ -164,6 +164,7 @@ export class Registrarse {
                 formulario2.classList.remove('is-invalid')
                 formulario2.classList.add('is-valid')
 
+                buscarNombreUsuario()
                 mandarAFirebaseUsuarios(this.correo, this.nombreYapellido, this.ocupacion)
                 this.verificarConCorreo()
                 this.aparecerLogin()

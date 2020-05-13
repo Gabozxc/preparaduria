@@ -35,24 +35,45 @@ export class Formulario {
         cardBody.appendChild(Profesor)
         let modalidad = document.createElement('p')
         modalidad.classList = 'card-text'
-        modalidad.appendChild(document.createTextNode('Modalidad de la clase:' + this.modalidadRadio))
+        let MensajeModalidadClase = `Modalidad de la clase: ${this.modalidadRadio}`
+        modalidad.innerHTML = MensajeModalidadClase
+
+        /* 
+        
+         let tecnologia = document.createElement('p')
+        tecnologia.classList = 'card-text'
+        let mensajeAparatosNecesarios = `Aparato necesario: ${tecnologiaRadio}`
+        tecnologia.innerHTML = mensajeAparatosNecesarios
+
+        
+        */
+   
+
         cardBody.appendChild(modalidad)
         let tecnologia = document.createElement('p')
         tecnologia.classList = 'card-text'
-        tecnologia.appendChild(document.createTextNode('Aparato necesario:' + this.tecnologiaRadio))
+        let mensajeAparatosNecesarios = `Aparato necesario: ${this.tecnologiaRadio}`
+        tecnologia.innerHTML = mensajeAparatosNecesarios
         cardBody.appendChild(tecnologia)
         let detallesTitutlo = document.createElement('p')
         detallesTitutlo.classList = 'card-text'
+        detallesTitutlo.style.fontWeight = 'bold'
         detallesTitutlo.appendChild(document.createTextNode('detalles adicionales'))
+
         cardBody.appendChild(detallesTitutlo)
         let detallesInfo = document.createElement('p')
         detallesInfo.appendChild(document.createTextNode(this.detalles))
         cardBody.appendChild(detallesInfo)
+
         let fechaFinal = document.createElement('p')
-        fechaFinal.appendChild(document.createTextNode('La fecha limite:' + this.fechaLimite))
+        let mensajeFechaFinal = `Fecha limite de inscripcion:  <b> ${this.fechaLimite} </b>`
+        fechaFinal.innerHTML =  mensajeFechaFinal
+
+
         cardBody.appendChild(fechaFinal)
         let cupos = document.createElement('p')
-        cupos.appendChild(document.createTextNode('Cupos disponibles:' + this.cantidadAlumnos))
+        let mensajeCantidadAlumnos = `Cupos disponibles: ${this.cantidadAlumnos}`
+        cupos.innerHTML = mensajeCantidadAlumnos
         cardBody.appendChild(cupos)
         let botonInscribirse = document.createElement('button')
         botonInscribirse.classList = 'btn btn-light'
@@ -77,7 +98,7 @@ export class Formulario {
         botonBorrar.appendChild(spanBorrar)
 
         //terminar de agregar los bloques mas grandes al html
-        divCardHeader.appendChild(botonBorrar)
+        // divCardHeader.appendChild(botonBorrar)
         divCard.appendChild(divCardHeader)
         divCard.appendChild(cardBody)
         document.getElementById('tabla').appendChild(divCard)
@@ -161,7 +182,8 @@ export class Formulario {
         
         cardBody.appendChild(fechaFinal)
         let cupos = document.createElement('p')
-        cupos.appendChild(document.createTextNode(' Cupos disponibles:' + cantidadAlumnos))
+        let mensajeCantidadAlumnos = `Cupos disponibles: ${cantidadAlumnos}`
+        cupos.innerHTML = mensajeCantidadAlumnos
         cardBody.appendChild(cupos)
         let botonInscribirse = document.createElement('button')
         botonInscribirse.classList = 'btn btn-light'

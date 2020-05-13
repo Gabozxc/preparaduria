@@ -14,7 +14,7 @@ const iniciarSesion = document.getElementById('formIniciar')
 let cerrarSesion = document.getElementById('cerrarSesion')
 var correoLogeado = ''
 var nombreUsuario = ''
-export { mandarAFirebaseUsuarios, mandarAFirebaseTablas}
+export { mandarAFirebaseUsuarios, mandarAFirebaseTablas, buscarNombreUsuario}
 
 // iniciar base de dato
 var firebaseConfig = {
@@ -43,12 +43,12 @@ function buscarNombreUsuario(){
     db.collection("users").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
            
-            if(correoLogeado === doc.data().correo){
+            if('gabozxc@gmail.com' === doc.data().correo){
                     nombreUsuario = doc.data().nombre
             }else {
-                nombreUsuario = 'anonimo'
+                
             }
-           
+           console.log(nombreUsuario)
 
         });
     });
@@ -349,21 +349,6 @@ function cargarEventos() {
 
        
     })
-
-
-    function  informacionPerfil(correoFirebase){
-
-        const profesor = document.getElementById('nombreRegistrarse').value
-        const correo = correoFirebase
-        const ocupaciones = document.getElementById('idOcupacion')
-        const ocupacion = ocupaciones.options[ocupaciones.selectedIndex].value
-        const contra1 = document.getElementById('contraRegistrarse').value
-        const perfil = new verPerfil(profesor, correo, ocupacion, contra1)
-        perfil.imprimirDatos()
-
-
-
-    }
 
     saltarseRegistro.addEventListener('click', () => {
 
