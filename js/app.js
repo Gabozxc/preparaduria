@@ -400,8 +400,8 @@ function cargarEventos() {
 function mandarAFirebaseUsuarios(correo,nombre, ocupacion){
         
     db.collection("users").add({
-        first: correo,
-        correo: nombre,
+        nombre: nombre,
+        correo: correo,
         ocupacion:ocupacion,
         IdUsuario: uuid.v1()
       })
