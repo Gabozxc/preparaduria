@@ -68,6 +68,8 @@ firebase.auth().onAuthStateChanged(function(user) {
             }
         });
     });
+    imprimirTablonesPerfil()
+
     } else {
       // User is signed out.
       // ...
@@ -213,7 +215,6 @@ function cargarEventos() {
     })
 
     botonVerPerfil.addEventListener('click', () => {
-
 
         document.getElementById('tablonPerfil').classList.remove('d-none')
         const cerrarPerfil = document.createElement('Button')
@@ -464,7 +465,36 @@ function datosVerPerfil(){
     
 }
 
+function imprimirTablonesPerfil(){
 
+console.log('se ejecuto el metodo')
+
+    db.collection("tablas").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            
+
+            if(doc.data().correo === datosUsuarios.email){
+                
+
+
+                console.log(doc.data().cantidadAlumnos)
+
+                let tablasPerfil = new verPerfil()
+
+                tablasPerfil.imprimirTablas(doc.data().cantidadAlumnos, doc.data().detalles, doc.data().fechaLimite, doc.data().modalidadRadio, doc.data().selectorMarcado, doc.data().tecnologiaRadio)
+
+
+            }
+        });
+    });
+
+
+}
+
+/*
+CantidadAlumnos correo detalles fechaLimite modalidadRadio profesor selectorMarcado tecnologiaRadio
+
+*/
 
 leerDatos()
 

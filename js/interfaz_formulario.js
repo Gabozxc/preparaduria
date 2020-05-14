@@ -110,16 +110,14 @@ export class Formulario {
 
     }
 
-    buscador() {
+    buscador(buscador, idCabeza) {
 
+       
         let buscadorChiquito = buscador.toLowerCase()
-
 
         idCabeza.forEach((elementos, index) => {
 
             if (buscador === idCabeza[index].innerText.toLowerCase() || buscadorChiquito.toUpperCase() === idCabeza[index].innerText.toUpperCase()) {
-
-
 
                 let carta = idCabeza[index].parentElement.parentElement
 
