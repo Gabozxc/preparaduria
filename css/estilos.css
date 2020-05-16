@@ -70,6 +70,14 @@
         background-color: white;
     }
     
+    .login {
+        position: fixed;
+        z-index: 19099999999;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        background-color: white;
+    }
     
     .container-cartas {
         display: none;
