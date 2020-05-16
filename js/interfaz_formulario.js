@@ -98,7 +98,7 @@ export class Formulario {
         let botonPreguntar = document.createElement('button')
         botonPreguntar.classList = 'btn btn-outline-light'
         botonPreguntar.setAttribute('type', 'button')
-        botonPreguntar.appendChild(document.createTextNode('incribirse'))
+        botonPreguntar.appendChild(document.createTextNode('Mandar mensaje'))
         cardBody.appendChild(botonPreguntar)
 
 
