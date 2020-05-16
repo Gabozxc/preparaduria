@@ -42,8 +42,6 @@ export class Formulario {
 
     imprimirDesdeFirebase(selector, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, profesor, id){
 
-
-        doc.data().selectorMarcado, doc.data().modalidadRadio,  doc.data().tecnologiaRadio, doc.data().cantidadAlumnos, doc.data().fechaLimite, doc.data().detalles, doc.data().profesor, doc.id
         
 
         let divCard = document.createElement('div')
