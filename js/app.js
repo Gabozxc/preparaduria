@@ -17,7 +17,7 @@ var datosUsuarios = ''
 var nombreUsuario = ''
 var correoLogeado = ''
 var ocupacionUsuario = ''
-export { mandarAFirebaseUsuarios, mandarAFirebaseTablas, datosVerPerfil}
+export { mandarAFirebaseUsuarios, mandarAFirebaseTablas, datosVerPerfil, imprimirTablonesPerfil}
 
 // iniciar base de dato
 var firebaseConfig = {
@@ -35,11 +35,7 @@ firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
 
-
-
 cargarEventos();
-
-
 
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -69,6 +65,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         });
     });
     imprimirTablonesPerfil()
+    leerDatos()
 
     } else {
       // User is signed out.
@@ -80,13 +77,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 function cargarEventos() {
     
 
-
-    
     document.querySelector('body').classList.add('fondoTablones')
 
 
-   
-    
     inputBuscador.addEventListener('input', (e) => {
 
         e.preventDefault()
@@ -146,11 +139,18 @@ function cargarEventos() {
         } else {
                 
             let formulario = new Formulario(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, nombreUsuario)
-
-            formulario.imprimirDatos()
-
-
+            
             mandarAFirebaseTablas(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, nombreUsuario)
+
+            const tablasPerfil = document.querySelectorAll('.carta')
+
+            tablasPerfil.forEach((tabla) => {
+
+                tabla.remove()
+
+            })
+
+            
 
 
         }
@@ -381,6 +381,7 @@ function cargarEventos() {
 
     })
 
+   
     botonIniciarSesion.addEventListener('click', datosVerPerfil())
 }
 
@@ -403,7 +404,6 @@ function mandarAFirebaseUsuarios(correo, nombre, ocupacion){
   
 function mandarAFirebaseTablas(selectorMarcado, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, profesor){
 
-
     db.collection("tablas").add({
         profesor: profesor,
         modalidadRadio: modalidadRadio,
@@ -421,35 +421,32 @@ function mandarAFirebaseTablas(selectorMarcado, modalidadRadio, tecnologiaRadio,
         console.error("Error adding document: ", error);
        });
 
+       
 
 }
 
 function leerDatos(){
 
+    let formulario = new Formulario()
+    const tablas = document.getElementById('tabla')
 
-    /*
-
-    selector, modalidadRadio, tecnologiaRadio, cantidadAlumnos, fechaLimite, detalles, profesor
-    
-    */
-
-     let formulario = new Formulario()
-
-    db.collection("tablas").get().then((querySnapshot) => {
+    db.collection("tablas").onSnapshot((querySnapshot) => {
+        tablas.innerHTML = ''
         querySnapshot.forEach((doc) => {
-           
-            formulario.imprimirDesdeFirebase(doc.data().selectorMarcado, doc.data().modalidadRadio,  doc.data().tecnologiaRadio, doc.data().cantidadAlumnos,  doc.data().fechaLimite, doc.data().detalles, doc.data().profesor)
-
-
+        
+            formulario.imprimirDesdeFirebase(doc.data().selectorMarcado, doc.data().modalidadRadio,  doc.data().tecnologiaRadio, doc.data().cantidadAlumnos, doc.data().fechaLimite, doc.data().detalles, doc.data().profesor, doc.id)
+            
         });
     });
-
 
 }
 
 function datosVerPerfil(){
     
     db.collection("users").get().then((querySnapshot) => {
+
+        
+
         querySnapshot.forEach((doc) => {
             
             if(doc.data().correo === datosUsuarios.email){
@@ -466,38 +463,27 @@ function datosVerPerfil(){
 }
 
 function imprimirTablonesPerfil(){
+   
+    let tablasPerfil = new verPerfil()
+    const tablas = document.getElementById('tablaPerfil')
 
-console.log('se ejecuto el metodo')
-
-    db.collection("tablas").get().then((querySnapshot) => {
+    db.collection("tablas").onSnapshot((querySnapshot) => {
+        tablas.innerHTML = ''
         querySnapshot.forEach((doc) => {
-            
-
+  
             if(doc.data().correo === datosUsuarios.email){
                 
-
-
-                console.log(doc.data().cantidadAlumnos)
-
-                let tablasPerfil = new verPerfil()
-
-                tablasPerfil.imprimirTablas(doc.data().cantidadAlumnos, doc.data().detalles, doc.data().fechaLimite, doc.data().modalidadRadio, doc.data().selectorMarcado, doc.data().tecnologiaRadio)
-
+                tablasPerfil.imprimirTablas(doc.data().cantidadAlumnos, doc.data().detalles, doc.data().fechaLimite, doc.data().modalidadRadio, doc.data().selectorMarcado, doc.data().tecnologiaRadio, doc.id, db)
 
             }
         });
     });
 
 
+
+
+
+
 }
 
-/*
-CantidadAlumnos correo detalles fechaLimite modalidadRadio profesor selectorMarcado tecnologiaRadio
 
-*/
-
-leerDatos()
-
-     //Agregar los cursos que maneja el sujeto, para que los pueda borrar
-     // al crear tablas agregar ID, el iD, debe ser el que tiene el usuario almacenado en la base de datos que es un array, al llamar este array con mi ID, llamare a todos los tablones con el ID similar
-     // modificar la imagen, esto lo veo peluo, jamas habia intentao algo asi
