@@ -124,12 +124,3 @@ export class Formulario {
 
 }
 
-
-// buscador.addEventListener('input', () => {
-//     if (buscador.value.length > 3) {
-//         //buscar api
-//         userInterfaz.obtenerBusqueda(buscador.value)
-//     } else {
-//         userInterfaz.mostrarEstablecimientos()
-//     }
-// })

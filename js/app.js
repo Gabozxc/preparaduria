@@ -5,6 +5,7 @@ import { verPerfil } from './ver_perfil.js'
 
 const botonEnviado = document.getElementById('subir')
 const inputBuscador = document.getElementById('buscador')
+const subirServicio = document.getElementById('subirServicio')
 const botonBorrar = document.getElementById('tabla')
 const botonRegistrarse = document.getElementById('formularioRegistrarse')
 const botonCrearCuenta = document.getElementById('crearCuenta')
@@ -12,15 +13,16 @@ const botonVerPerfil = document.getElementById('verPerfil')
 const saltarseRegistro = document.getElementById('SaltarseRegistro')
 const iniciarSesion = document.getElementById('formIniciar')
 const botonIniciarSesion = document.getElementById('botonIniciar')
-let cerrarSesion = document.getElementById('cerrarSesion')
-var datosUsuarios = ''
-var nombreUsuario = ''
-var correoLogeado = ''
-var ocupacionUsuario = ''
+let cerrarSesion = document.getElementById('cerrarSesion'),
+     datosUsuarios = '',
+     nombreUsuario = '',
+     correoLogeado = '',
+     ocupacionUsuario = ''
 export { mandarAFirebaseUsuarios, mandarAFirebaseTablas, datosVerPerfil, imprimirTablonesPerfil}
 
+
 // iniciar base de dato
-var firebaseConfig = {
+let firebaseConfig = {
 
     apiKey: "AIzaSyDdpE9yzE8XEdn6KaZzR8mTHR584LadczE",
     authDomain: "preparaduria-usb.firebaseapp.com",
@@ -33,7 +35,7 @@ var firebaseConfig = {
 }
 firebase.initializeApp(firebaseConfig);
 
-var db = firebase.firestore();
+let db = firebase.firestore();
 
 cargarEventos();
 
@@ -72,6 +74,11 @@ firebase.auth().onAuthStateChanged(function(user) {
       // ...
     
     }
+    if(user.emailVerified){
+        subirServicio.setAttribute('data-target', '#exampleModal')
+    }
+
+    
   });
 
 function cargarEventos() {
@@ -107,6 +114,23 @@ function cargarEventos() {
             })
 
         }
+    })
+
+    subirServicio.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        if(subirServicio.getAttribute('data-target') === null){
+
+            Swal.fire({
+                title: 'Error!',
+                text: 'Para subir una preparaduria debes verificar tu cuenta con el enlace que enviamos a tu correo',
+                icon: 'error',
+                confirmButtonText: 'Esta bien'
+              })
+              
+
+        }
+
     })
 
     botonEnviado.addEventListener('click', () => {
@@ -361,13 +385,15 @@ function cargarEventos() {
 
     cerrarSesion.addEventListener('click', (e)=> {
         e.preventDefault()
-
-        console.log('hola')
+        const header = document.getElementById('cabezon')
+        header.classList.add('d-none')
+        
         firebase.auth().signOut()
         .then(() => {
 
-            let tabla = document.getElementById('tablaRegistrarse')
-            let tablaLogin = document.getElementById('tablaLogin')
+            
+            const tabla = document.getElementById('tablaRegistrarse')
+            const tablaLogin = document.getElementById('tablaLogin')
             tablaLogin.classList.remove('d-none')
             tablaLogin.style.display = 'block'
             tabla.style.display = 'none'
