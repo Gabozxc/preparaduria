@@ -268,6 +268,8 @@ function cargarEventos() {
     
                 let tabla = document.getElementById('tablaRegistrarse')
                 let tablaLogin = document.getElementById('tablaLogin')
+                let header  = document.getElementById('cabezon')
+                header.classList.add('d-none')
                 tablaLogin.classList.remove('d-none')
                 tablaLogin.style.display = 'block'
                 tabla.style.display = 'none'
